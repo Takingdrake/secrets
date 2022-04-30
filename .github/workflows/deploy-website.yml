@@ -1,0 +1,44 @@
+name: Gatsby Publish
+
+on:
+    push:
+        branches:
+            - master
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v2
+
+            -   name: Initialize GH User
+                run: |
+                    git config user.name "GitHub Actions"
+                    git config user.email "actions@github.com"
+
+            -   name: Set Node.js
+                uses: actions/setup-node@master
+                with:
+                    node-version: '16'
+
+            -   name: Install dependencies
+                run: yarn install
+
+            -   name: Add production Config
+                run: echo "${{ secrets.SECRETS }}" > .env.production
+
+            -   name: Build
+                run: yarn run build
+
+            -   name: Deploy
+                run: |
+                    # Add in the correct CNAME
+                    echo "brainstorm.takingdrake.com" > public/CNAME
+
+                    # Commit the build then use 'git subtree' to create a branch with just the public contents
+                    git add public -f
+                    git commit -m "Build Production Website"
+                    git checkout -b gh-pages `git subtree split --prefix public master`
+
+                    # Push to Production
+                    git push --set-upstream origin gh-pages --force
