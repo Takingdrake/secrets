@@ -38,7 +38,7 @@ jobs:
                     # Commit the build then use 'git subtree' to create a branch with just the public contents
                     git add public -f
                     git commit -m "Build Production Website"
-                    git checkout -b gh-pages `git subtree split --prefix public master`
+                    git checkout -b gh-pages `git subtree split --prefix public main`
 
                     # Push to Production
                     git push --set-upstream origin gh-pages --force
