@@ -33,8 +33,7 @@ const  LoginButton = () => {
 
 const KeyboardButton = () => {
 
-
-    if(!navigator.userAgentData.mobile){
+    if(typeof window !== `undefined` && !navigator.userAgentData.mobile){
         return null
     }
 
