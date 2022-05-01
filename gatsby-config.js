@@ -4,8 +4,11 @@ require("dotenv").config({
 
 module.exports = {
     siteMetadata: {
-        siteUrl: "https://www.yourdomain.tld",
-        title: "Secrets",
+        author: "Cannon Lock",
+        description: "Get your thoughts our of your head",
+        image: "src/assets/images/WebsiteFavicon.png",
+        siteUrl: "https://brainstorm.takingdrake.com",
+        title: "Brainstorm",
     },
     plugins: [
         "gatsby-plugin-theme-ui",
@@ -21,18 +24,10 @@ module.exports = {
         {
             resolve: "gatsby-plugin-manifest",
             options: {
-                icon: "src/images/icon.png",
+                icon: "src/assets/images/WebsiteFavicon.png",
             },
         },
         "gatsby-plugin-sharp",
-        "gatsby-transformer-sharp",
-        {
-            resolve: "gatsby-source-filesystem",
-            options: {
-                name: "images",
-                path: "./src/images/",
-            },
-            __key: "images",
-        },
+        "gatsby-transformer-sharp"
     ],
 };

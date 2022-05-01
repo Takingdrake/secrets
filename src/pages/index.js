@@ -5,7 +5,7 @@ import { signInWithGoogle } from "../assets/js/util";
 import { SecretsCanvas } from "../components/secretBox";
 import {useSelector} from 'react-redux'
 import {selectUID} from "../state/secretSlice";
-import keyboard from "../assets/images/keyboard.svg"
+import SEO from "../components/seo"
 import google from "../assets/images/google.svg"
 
 const  LoginButton = () => {
@@ -61,6 +61,7 @@ const IndexPage = () => {
 
     return (
         <Box sx={{height: "100vh", width: "100vw"}} as={"main"}>
+            <SEO title={"Brainstorm"}/>
             <LoginButton/>
             <KeyboardButton />
             <Suspense>
