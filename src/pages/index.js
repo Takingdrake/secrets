@@ -1,10 +1,12 @@
 import React, {Suspense} from "react"
-import {Button, Box} from "theme-ui"
+import {Button, Box, Flex, Image, Input} from "theme-ui"
 import {useState} from "react";
 import { signInWithGoogle } from "../assets/js/util";
 import { SecretsCanvas } from "../components/secretBox";
 import {useSelector} from 'react-redux'
 import {selectUID} from "../state/secretSlice";
+import keyboard from "../assets/images/keyboard.svg"
+import google from "../assets/images/google.svg"
 
 const  LoginButton = () => {
 
@@ -14,11 +16,42 @@ const  LoginButton = () => {
 
     return (
         <Button
-            sx={{position: 'absolute', m: 2, top: 0, right: 0, zIndex:2, color: "#3a3a3a", backgroundColor: "#fd9c85"}}
+            sx={{position: 'absolute', m: 2, px: 2, py: 1, top: 0, right: 0, zIndex:2, color: "#3a3a3a", backgroundColor: "#fd9c8552"}}
             onClick={signInWithGoogle}
         >
-            Login With Google
+            <Flex>
+                <Box>
+                    Login
+                </Box>
+                <Flex>
+                    <Image sx={{height: "auto", my: "auto", pl: 2}} src={google}/>
+                </Flex>
+            </Flex>
         </Button>
+    )
+}
+
+const KeyboardButton = () => {
+
+
+    if(!navigator.userAgentData.mobile){
+        return null
+    }
+
+    return (
+        <Input
+            sx={{
+                position: "absolute",
+                top: "25%",
+                height: "50vh",
+                bg: "transparent",
+                border: 0,
+                zIndex: 2,
+                outline: "none",
+                outlineWidth: 0,
+                color: "transparent"
+            }}
+        />
     )
 }
 
@@ -29,6 +62,7 @@ const IndexPage = () => {
     return (
         <Box sx={{height: "100vh", width: "100vw"}} as={"main"}>
             <LoginButton/>
+            <KeyboardButton />
             <Suspense>
                 <SecretsCanvas />
             </Suspense>
